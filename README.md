@@ -5,7 +5,7 @@ This UserScript modifies the interface of ChatGPT to fix the direction of RTL (r
 ## Installation
 
 1. Install a UserScript manager extension for your browser. (Example: Tampermonkey, Greasemonkey)
-2. [Click here to install the ChatGPT RTL UserScript](Chatgpt-RTL.user.js).
+2. [Click here to install the ChatGPT RTL UserScript](https://github.com/AlirezaF80/ChatGPT-RTL/raw/main/Chatgpt-RTL.user.js).
    - If the installation doesn't start automatically, you can right-click the link, select "Save Link As...", and save the file with a `.user.js` extension.
 3. Follow the instructions provided by your UserScript manager to install the UserScript.
 

@@ -1,6 +1,6 @@
-# ChatGPT RTL UserScript
+# ChatGPT RTL
 
-This UserScript modifies the interface of ChatGPT to fix the direction of RTL (right-to-left) languages, such as Persian, Hebrew, and Arabic. It ensures that text elements containing RTL languages are displayed correctly from right to left.
+ChatGPT RTL is a UserScript which modifies the interface of ChatGPT to fix the direction of RTL (right-to-left) languages, such as Persian, Hebrew, and Arabic. It ensures that text elements containing RTL languages are displayed correctly from right to left.
 
 ## Installation
 

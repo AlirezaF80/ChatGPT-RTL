@@ -5,6 +5,7 @@
 // @version      0.1.2
 // @description  Fixes the direction of RTL languages in ChatGPT's interface
 // @match        https://chat.openai.com/*
+// @match        https://chatgpt.com/*
 // @grant        none
 // ==/UserScript==
 

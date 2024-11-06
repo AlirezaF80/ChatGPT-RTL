@@ -11,7 +11,7 @@ ChatGPT RTL is a UserScript which modifies the interface of ChatGPT to fix the d
 
 ## Usage
 
-Once the UserScript is installed, it will automatically run on the ChatGPT website (https://chat.openai.com). It will detect RTL text and modify the corresponding elements to display the text correctly from right to left.
+Once the UserScript is installed, it will automatically run on the [ChatGPT website](https://chatgpt.com). It will detect RTL text and modify the corresponding elements to display the text correctly from right to left.
 
 ## Credits
 

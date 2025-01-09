@@ -9,19 +9,35 @@
 // @grant        none
 // ==/UserScript==
 
-(function () {
-    'use strict';
-    const PERSIAN_REGEX = /[\u0600-\u06FF\uFB8A\u067E\u0686\u06AF\u200C\u200F]+/;
-    const HEBREW_REGEX = /[\u0590-\u05FF\uFB1D-\uFB4F]+/;
-    const ARABIC_REGEX = /[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDCF\uFDF0-\uFDFF\uFE70-\uFEFF]+/;
-    const RTL_REGEX = new RegExp(PERSIAN_REGEX.source + '|' + HEBREW_REGEX.source + '|' + ARABIC_REGEX.source);
+;(function() {
+    "use strict";
+    
+    var PERSIAN_REGEX = /[\u0600-\u06FF]/;
+    var HEBREW_REGEX = /[\u0590-\u05FF]/;
+    var ARABIC_REGEX = /[\u0600-\u06FF]/;
+    var RTL_REGEX = new RegExp([PERSIAN_REGEX.source, HEBREW_REGEX.source, ARABIC_REGEX.source].join("|"));
 
     function containsRTLText(text) {
         return RTL_REGEX.test(text);
     }
 
     function changeTextElementDirection(element) {
-        element.parentNode.setAttribute('dir', 'rtl');
+        if (element.parentNode) {
+            const parentElement = element.parentNode;
+            parentElement.setAttribute('dir', 'rtl');
+            parentElement.style.cssText += 'text-align: right !important; direction: rtl !important;';
+            
+            // Apply to parent containers to ensure proper alignment
+            let currentElement = parentElement;
+            while (currentElement && currentElement !== document.body) {
+                if (currentElement.classList.contains('markdown-content') || 
+                    currentElement.classList.contains('text-message') ||
+                    /^H[1-6]$/.test(currentElement.tagName)) {
+                    currentElement.style.cssText += 'text-align: right !important; direction: rtl !important;';
+                }
+                currentElement = currentElement.parentElement;
+            }
+        }
     }
 
     function isAlreadyModified(element) {
@@ -29,6 +45,22 @@
     }
 
     function modifyPersianTextElements(element) {
+        if (element === document.body) {
+            const style = document.createElement('style');
+            style.textContent = `
+                .markdown-content, .text-message, 
+                .markdown-content h1, .markdown-content h2, 
+                .markdown-content h3, .markdown-content h4, 
+                .markdown-content h5, .markdown-content h6,
+                .markdown-content p, .markdown-content div,
+                [dir="rtl"] {
+                    text-align: right !important;
+                    direction: rtl !important;
+                }
+            `;
+            document.head.appendChild(style);
+        }
+
         var childNodes = element.childNodes;
         for (var i = 0; i < childNodes.length; i++) {
             var childNode = childNodes[i];
@@ -50,7 +82,7 @@
             const mutation = mutationsList[i];
             modifyPersianTextElements(mutation.target.parentNode);
         }
-    }
+    };
 
     modifyPersianTextElements(document.body);
 
